@@ -64,7 +64,7 @@ function showNextQuestion() {
     answersBox.removeChild(answersBox.firstChild);
   }
   // put the four answers
-  const answers = questionItem.incorrect_answers;
+  const answers = [...questionItem.incorrect_answers];
   answers.push(questionItem.correct_answer);
   shuffleArray(answers);
 
@@ -83,6 +83,11 @@ function showNextQuestion() {
     backBtn.style.visibility = "hidden";
   } else {
     backBtn.style.visibility = "visible";
+  }
+  if (currentQuestionIndex === questions.length -1) {
+      nextBtn.innerText = "See results";
+  } else {
+      nextBtn.innerText = "Next";
   }
   backBtn.disabled = true;
   nextBtn.disabled = true;
@@ -105,6 +110,26 @@ function selectAnswer(ev) {
   });
 }
 
+function goNextQuestion() {
+    if (currentQuestionIndex < questions.length) {
+        showNextQuestion()
+    } else {
+        hideAllSections()
+        showResults()
+    }
+}
+
+function showResults() {
+    alert("To do show resutls");
+}
+
+function goBackQuestion() {
+    if (currentQuestionIndex > 1) {
+        currentQuestionIndex -= 2               // shorthand for minus 2
+        showNextQuestion();
+    }
+        
+}
 ////////////////////////////////////////////////////////////////////////////////
 // Ultils
 // from https://stackoverflow.com/a/12646864
@@ -118,6 +143,8 @@ function shuffleArray(array) {
 // Listeners
 
 startBtn.addEventListener("click", startQuiz);
+nextBtn.addEventListener("click", goNextQuestion);
+backBtn.addEventListener("click", goBackQuestion)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Init
