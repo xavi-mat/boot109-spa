@@ -1,8 +1,8 @@
 "use strict";
 /**
  * Simple Page Application - Exercise
- * for  The Bridge
- * by   xavimat
+ * for The Bridge
+ * by xavimat
  * 2022-05-04
  */
 
@@ -26,6 +26,8 @@ const APIURL =
 // Globals
 let questions;
 let currentQuestionIndex;
+let right = 0;
+let wrong = 0;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions
@@ -84,11 +86,13 @@ function showNextQuestion() {
   } else {
     backBtn.style.visibility = "visible";
   }
-  if (currentQuestionIndex === questions.length -1) {
-      nextBtn.innerText = "See results";
+
+  if (currentQuestionIndex === questions.length - 1) {
+    nextBtn.innerText = "See results";
   } else {
-      nextBtn.innerText = "Next";
+    nextBtn.innerText = "Next";
   }
+
   backBtn.disabled = true;
   nextBtn.disabled = true;
   // add one to the counter
@@ -100,8 +104,10 @@ function selectAnswer(ev) {
   clickedButton.classList.remove("btn-primary");
   if (clickedButton.dataset.correct) {
     clickedButton.classList.add("btn-success");
+    right = right + 1;
   } else {
     clickedButton.classList.add("btn-danger");
+    wrong = wrong + 1;
   }
   backBtn.disabled = false;
   nextBtn.disabled = false;
@@ -111,25 +117,40 @@ function selectAnswer(ev) {
 }
 
 function goNextQuestion() {
-    if (currentQuestionIndex < questions.length) {
-        showNextQuestion()
-    } else {
-        hideAllSections()
-        showResults()
-    }
+  if (currentQuestionIndex < questions.length) {
+    showNextQuestion();
+  } else {
+    hideAllSections();
+    showResults();
+  }
 }
 
 function showResults() {
-    alert("To do show resutls");
+  alert(
+    `Well done, you scored ${right} correct answers and ${wrong} wrong answers.`
+  );
+  var usersDb = localStorage.getItem("results"); //traemos la informacion del local storage a un var
+  let database = JSON.parse(usersDb); //creating var to store. necessary step to translate to js
+  if (database == null) {
+    database = [];
+  }
+  let results = {
+    date: new Date(),  
+    correctAnswers: right,
+    incorrectAnswers: wrong,
+
+  };
+  database.push(results); //pushing infoOfUsers to database array
+  localStorage.setItem("results", JSON.stringify(database));
 }
 
 function goBackQuestion() {
-    if (currentQuestionIndex > 1) {
-        currentQuestionIndex -= 2               // shorthand for minus 2
-        showNextQuestion();
-    }
-        
+  if (currentQuestionIndex > 1) {
+    currentQuestionIndex -= 2; // shorthand for minus 2
+    showNextQuestion();
+  }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 // Ultils
 // from https://stackoverflow.com/a/12646864
@@ -144,10 +165,12 @@ function shuffleArray(array) {
 
 startBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", goNextQuestion);
-backBtn.addEventListener("click", goBackQuestion)
+backBtn.addEventListener("click", goBackQuestion);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Init
-
 ////////////////////////////////////////////////////////////////////////////////
 //
+// make two variables for the wrong and right answrers incrementing them
+// show results with these numbers
+//the variables will sTART EVERY TIME a users starts the quiz and will be stored in the local storage. end at the end
