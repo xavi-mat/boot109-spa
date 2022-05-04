@@ -21,7 +21,7 @@ const grade = document.getElementById("grade");
 const resultMsg = document.getElementById("result-msg");
 const replayBtn = document.getElementById("replay-btn");
 const APIURL =
-  "https://opentdb.com/api.php?amount=10&category=20&difficulty=hard&type=multiple";
+  "https://opentdb.com/api.php?amount=1&category=20&difficulty=hard&type=multiple";
 ////////////////////////////////////////////////////////////////////////////////
 // Globals
 let questions;
@@ -129,18 +129,18 @@ function showResults() {
   alert(
     `Well done, you scored ${right} correct answers and ${wrong} wrong answers.`
   );
+  results.classList.remove("d-none");
   var usersDb = localStorage.getItem("results"); //traemos la informacion del local storage a un var
   let database = JSON.parse(usersDb); //creating var to store. necessary step to translate to js
   if (database == null) {
     database = [];
   }
-  let results = {
-    date: new Date(),  
+  let resultsData = {
+    date: new Date(),
     correctAnswers: right,
     incorrectAnswers: wrong,
-
   };
-  database.push(results); //pushing infoOfUsers to database array
+  database.push(resultsData); //pushing infoOfUsers to database array
   localStorage.setItem("results", JSON.stringify(database));
 }
 

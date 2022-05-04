@@ -1,93 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SPA - Quiz</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SPA - Quiz</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
-</head>
+  <body>
+    <nav class="navbar bg-primary text-light mb-3">
+      <div class="container">
+        <h1>Quiz</h1>
+      </div>
+    </nav>
 
-<body>
-  <nav class="navbar bg-primary text-light mb-3">
+    <div class="fixed-top mt-md-5 pt-md-5 pe-1 d-flex justify-content-end">
+      <div id="toast" class="toast show">
+        <div class="toast-header">
+          <strong class="me-auto">Your answer is:</strong>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="toast"
+          ></button>
+        </div>
+        <div id="toast-text" class="toast-body alert-success">Correct!</div>
+      </div>
+    </div>
+
     <div class="container">
-      <h1>Quiz</h1>
-    </div>
-  </nav>
+      <!-- Section Home -->
+      <section id="home" class="d-flex justify-content-center flex-wrap">
+        <div class="card m-3 p-3">
+          <h3>Welcome to the quiz!</h3>
+          <button id="start-btn" class="btn btn-primary">Take the quiz</button>
+        </div>
+        <div class="card m-3 p-3">
+          <h3>Your stats</h3>
+          <div id="stats-box">There are no stats to show.</div>
+        </div>
+      </section>
 
-  <div class="fixed-top mt-md-5 pt-md-5 pe-1 d-flex justify-content-end">
-    <div id="toast" class="toast show">
-      <div class="toast-header">
-        <strong class="me-auto">Your answer is:</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
-      </div>
-      <div id="toast-text" class="toast-body alert-success">
-        Correct!
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-
-    <!-- Section Home -->
-    <section id="home" class="d-flex justify-content-center flex-wrap">
-      <div class="card m-3 p-3">
-        <h3>Welcome to the quiz!</h3>
-        <button id="start-btn" class="btn btn-primary">Take the quiz</button>
-      </div>
-      <div class="card m-3 p-3">
-        <h3>Your stats</h3>
-        <div id="stats-box">There are no stats to show.</div>
-      </div>
-    </section>
-
-    <!-- Section quiz-question -->
-    <section id="question" class="d-none">
-      <div class="d-flex justify-content-center">
-        <div class="card m-md-5">
-          <div class="card-body p-md-4">
-            <div class="progress">
-              <div id="progress-bar" class="progress-bar progress-bar-striped" style="width:40%"></div>
+      <!-- Section quiz-question -->
+      <section id="question" class="d-none">
+        <div class="d-flex justify-content-center">
+          <div class="card m-md-5">
+            <div class="card-body p-md-4">
+              <div class="progress">
+                <div
+                  id="progress-bar"
+                  class="progress-bar progress-bar-striped"
+                  style="width: 40%"
+                ></div>
+              </div>
             </div>
-          </div>
-          <div class="card-header p-4">
-            <div id="question-text" class="lead text-center"></div>
-          </div>
-          <div class="card-body p-md-4">
-            <div id="answers-box" class="d-flex flex-wrap justify-content-center p-3"></div>
-          </div>
-          <div class="card-footer p-md-4">
-            <div class="d-flex justify-content-between">
-              <button id="back-btn" class="btn btn-primary px-5">Back</button>
-              <button id="next-btn" class="btn btn-primary px-5">Next</button>
+            <div class="card-header p-4">
+              <div id="question-text" class="lead text-center"></div>
+            </div>
+            <div class="card-body p-md-4">
+              <div
+                id="answers-box"
+                class="d-flex flex-wrap justify-content-center p-3"
+              ></div>
+            </div>
+            <div class="card-footer p-md-4">
+              <div class="d-flex justify-content-between">
+                <button id="back-btn" class="btn btn-primary px-5">Back</button>
+                <button id="next-btn" class="btn btn-primary px-5">Next</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Section results -->
-    <section id="results" class="d-none">
-      <div id="grade"></div>
-      <div>
-        <h2>Here are your results!</h2>
-        <p id="result-msg"></p>
-        <button id="replay-btn" class="btn btn-primary">Play again</button>
-      </div>
-    </section>
+      <!-- Section results -->
+      <section id="results" class="d-none">
+        <div id="grade"></div>
+        <div>
+          <h2>Here are your results!</h2>
+          <p id="result-msg"></p>
+          <button id="replay-btn" class="btn btn-primary">Play again</button>
+        </div>
+      </section>
+    </div>
 
-  </div>
+    <footer class="mt-5 p-3 bg-primary text-light text-center fixed-bottom">
+      &copy; 2022, by Alex & Xavi
+    </footer>
 
-  <footer class="mt-5 p-3 bg-primary text-light text-center fixed-bottom">
-    &copy; 2022, by Alex & Xavi
-  </footer>
-
-  <script src="main.js"></script>
-</body>
-
+    <script src="main.js"></script>
+  </body>
 </html>
