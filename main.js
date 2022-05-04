@@ -9,7 +9,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Constants
 // DOM
-
+const home = document.getElementById("home");
+const startButton = document.getElementById("start-btn");
+const questions = document.getElementById("questions");
 const quizQuestion = document.getElementById('quiz-question');
 const answersBox = document.getElementById('answers-box');
 const backBtn = document.getElementById('back-btn');
