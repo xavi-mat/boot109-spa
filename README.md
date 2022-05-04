@@ -6,7 +6,7 @@ https://classroom.google.com/u/0/c/NDgwNDYwMTI2OTAz/a/NTExMTY0NjUzNDUz/details
 ## Description
 
 ### Authors
-[Alex](@alextebbitt) & [Xavi](@xavi-mat)
+[Alex (@alextebbitt)](@alextebbitt) & [Xavi (@xavi-mat)](@xavi-mat)
 
 ### Technologies
 * HTML5 (only one file)
