@@ -35,6 +35,8 @@ async function startQuiz() {
   // hide all
   hideAllSections();
   // fetch questions
+  right = 0; // reinializing variiable to start quiz again
+  wrong = 0;
   const data = await getQuestions();
   questions = data.results;
   console.log(questions);
@@ -166,7 +168,7 @@ function shuffleArray(array) {
 startBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", goNextQuestion);
 backBtn.addEventListener("click", goBackQuestion);
-
+replayBtn.addEventListener("click", startQuiz);
 ////////////////////////////////////////////////////////////////////////////////
 // Init
 ////////////////////////////////////////////////////////////////////////////////
