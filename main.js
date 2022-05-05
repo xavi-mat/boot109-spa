@@ -85,7 +85,7 @@ function showChart(database) {
         data.push(percent.toFixed(0));
     });
 
-    // Destroy formr chart, if any
+    // Destroy former chart, if any
 
     if (myChart) {
         myChart.destroy();

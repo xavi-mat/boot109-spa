@@ -30,7 +30,7 @@ Code a funcional quiz:
 - [x] Add BS classes to elements
 - [x] Beautify results
 - [x] Spinner
-- [ ] Stats chart in home
+- [x] Stats chart in home
 
 ### JS
 - [x] Fetch data from API
@@ -44,4 +44,4 @@ Code a funcional quiz:
 - [x] Progress bar
 - [x] Toast
 - [x] Spinner
-- [ ] Put data in chart
+- [x] Put data in chart
