@@ -14,13 +14,13 @@ const questionsSect = document.getElementById("question");
 const questionText = document.getElementById("question-text");
 const answersBox = document.getElementById("answers-box");
 const nextBtn = document.getElementById("next-btn");
-const results = document.getElementById("results");
-const grade = document.getElementById("grade");
+const resultsSect = document.getElementById("results");
+const gradeBox = document.getElementById("grade");
 const resultMsg = document.getElementById("result-msg");
 const replayBtn = document.getElementById("replay-btn");
 
 // Constants
-const NUM_QUESTIONS = 10;
+const NUM_QUESTIONS = 2;
 const APIURL =
   `https://opentdb.com/api.php?amount=${NUM_QUESTIONS}&category=20&difficulty=hard&type=multiple`;
 
@@ -39,7 +39,7 @@ function startQuiz() {
   points = {right: 0, wrong: 0};
   currentQuestionIndex = 0;
   // fetch questions
-  getQuestions()
+  getQuestions();
 }
 
 function hideAllSections() {
@@ -49,14 +49,22 @@ function hideAllSections() {
 }
 
 function getQuestions() {
-    return fetch(APIURL).then((response) => { // gets info from server, if success then we use it
+    // fetch(APIURL)
+    //     .then((response) => { // gets info from server, if success then we use it
+    //         const data = response.json() ; // translating to readable info
+    //         questions = data.results;  // assighning the results to questions variable
+    //         showNextQuestion();  // perform function
+    // });
 
-        const data = response.json() ; // translating to readable info
-        questions = data.results;  // assighning the results to questions variable
-        showNextQuestion();  // perform function
-    });
-
-
+    fetch(APIURL)
+        .then((resp) => resp.json())
+        .then((data) => data.results)
+        .then(dataResults => {
+            questions = dataResults;
+        })
+        .then(()=>{
+            showNextQuestion();
+        });
 }
 
 function showNextQuestion() {
@@ -115,7 +123,7 @@ function selectAnswer(ev) {
 }
 
 function goNextQuestion() {
-  
+
   if (currentQuestionIndex < questions.length) {
     // There are more questions:
     showNextQuestion();
@@ -143,15 +151,20 @@ function saveResults() {
 
 function showResults() {
 
-  alert(
-    `Well done, you scored ${points.right} correct answers and ${points.wrong} wrong answers.`
-  );
+//   alert(
+//     `Well done, you scored ${points.right} correct answers and ${points.wrong} wrong answers.`
+//   );
 
+    gradeBox.innerHTML = `${points.right} / ${points.right + points.wrong}`;
 
-  results.classList.remove("d-none");
-
-
-
+    if (points.right >= 8) {
+        resultMsg.innerHTML = `Well done, you scored ${points.right} correct answers and ${points.wrong} wrong answers.`;
+    } else if (points.right >= 4) {
+        resultMsg.innerHTML = `Not bad. you scored ${points.right} correct answers and ${points.wrong} wrong answers.`;
+    } else {
+        resultMsg.innerHTML = `Unfortunatelly, you scored ${points.right} correct answer(s) and ${points.wrong} wrong answer(s).`;
+    }
+    resultsSect.classList.remove("d-none");
 }
 
 function goBackQuestion() {
@@ -172,10 +185,11 @@ function shuffleArray(array) {
 }
 ////////////////////////////////////////////////////////////////////////////////
 // Listeners
-
 startBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", goNextQuestion);
 replayBtn.addEventListener("click", startQuiz);
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // Init
 ////////////////////////////////////////////////////////////////////////////////
