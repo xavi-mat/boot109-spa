@@ -44,3 +44,4 @@ Code a funcional quiz:
 - [x] Progress bar
 - [x] Toast
 - [x] Spinner
+- [ ] Put data in chart

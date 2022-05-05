@@ -29,6 +29,8 @@ const homeBtnResults = document.getElementById("home-btn-results");
 const homeBtnNav = document.getElementById("home-btn-nav");
 const spinnerBox = document.getElementById('spinner');
 
+const ctx = document.getElementById('myChart');
+
 // Constants
 const NUM_QUESTIONS = 10;
 const APIURL =
@@ -39,6 +41,7 @@ const APIURL =
 let questions;
 let currentQuestionIndex;
 let points = { right: 0, wrong: 0 };
+let myChart;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions
@@ -46,23 +49,70 @@ function goHome() {
     hideAllSections();
     const database = getSavedData();
 
-    let inn = '';
+    // Placeholder data as stats:
+    // let inn = '';
 
-    database.forEach((stat) => {
-        const label = stat.date.substring(0,10);
-        const percent =  100 * stat.correctAnswers / (stat.incorrectAnswers + stat.correctAnswers);
-        inn += `<li>${label}: ${percent}%</li>`;
-    });
+    // database.forEach((stat) => {
+    //     const label = stat.date.slice(0,-3);
+    //     const percent =  100 * stat.correctAnswers / (stat.incorrectAnswers + stat.correctAnswers);
+    //     inn += `<li>${label}: ${percent}%</li>`;
+    // });
 
-    if (inn === '') {
-        inn = 'There are no stats to show.';
-    } else {
-        inn = '<ul>' + inn + '</ul>';
-    }
+    // if (inn === '') {
+    //     inn = 'There are no stats to show.';
+    // } else {
+    //     inn = '<ul>' + inn + '</ul>';
+    // }
 
-    statsBox.innerHTML = inn;
+    // statsBox.innerHTML = inn;
+
+    showChart(database);
 
     showSection(homeSect);
+}
+
+function showChart(database) {
+
+    // Create the data for the chart from the 'data' array
+    const labels = [];
+    const data = [];
+
+    database.forEach((stat) => {
+        const label = stat.date.slice(0,-3);
+        const percent =  100 * stat.correctAnswers / (stat.incorrectAnswers + stat.correctAnswers);
+
+        labels.push(label);
+        data.push(percent.toFixed(0));
+    });
+
+    // Destroy formr chart, if any
+
+    if (myChart) {
+        myChart.destroy();
+    }
+
+    myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '% of success',
+                data: data,
+                borderWidth: 1,
+                backgroundColor: '#ffc107',
+                borderRadius: 15,
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            },
+            responsive: false
+        }
+    });
 }
 
 function startQuiz() {
@@ -89,7 +139,7 @@ function showSection(section) {
     setTimeout(() => {
         section.classList.remove('d-none');
         spinnerBox.classList.add('d-none');
-    }, 2000);
+    }, 1000);
 }
 
 function getQuestions() {
