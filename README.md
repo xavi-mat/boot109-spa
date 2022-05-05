@@ -23,19 +23,20 @@ Code a funcional quiz:
 
 ## TODO lists
 
-### Frontend
+### HTML, CSS
 - [x] Structure of html minimal elements
 - [x] Add navBar
 - [x] Structure of html main containers
 - [x] Add BS classes to elements
+- [ ] Beautify results
 - [ ] Stats chart in home
 
-### Backend
+### JS
 - [x] Fetch data from API
 - [x] Quiz functionality (questions, answers, next/back navigation)
 - [x] Count right/wrong points
-- [ ] Show result points
-- [ ] Show result sentence (according to points)
+- [x] Show result points
+- [x] Show result sentence (according to points)
 - [x] Store points in localStorage
 - [ ] Retrieve points from localStorage
 - [ ] Show points in stats block
