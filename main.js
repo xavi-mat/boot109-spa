@@ -28,7 +28,7 @@ const APIURL =
 // Globals
 let questions;
 let currentQuestionIndex;
-let points = {right: 0, wrong: 0, tries: 0};
+let points = {right: 0, wrong: 0};
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions
@@ -36,7 +36,7 @@ function startQuiz() {
   // hide all
   hideAllSections();
   // reinitializing variables to start quiz again
-  points = {right: 0, wrong: 0, tries: 0};
+  points = {right: 0, wrong: 0};
   currentQuestionIndex = 0;
   // fetch questions
   getQuestions()
@@ -137,7 +137,6 @@ function showResults() {
     date: new Date(),
     correctAnswers: points.right,
     incorrectAnswers: points.wrong,
-    tries: points.tries,
   };
   database.push(resultsData); //pushing infoOfUsers to database array
   localStorage.setItem("results", JSON.stringify(database));
