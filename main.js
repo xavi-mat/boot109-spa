@@ -21,16 +21,15 @@ const resultMsg = document.getElementById("result-msg");
 const replayBtn = document.getElementById("replay-btn");
 
 // Constants
-const NUM_QUESTIONS = 1;
+const NUM_QUESTIONS = 10;
 const APIURL =
   `https://opentdb.com/api.php?amount=${NUM_QUESTIONS}&category=20&difficulty=hard&type=multiple`;
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Globals
 let questions;
 let currentQuestionIndex;
-let right = 0;
-let wrong = 0;
+let points = {right: 0, wrong: 0, tries: 0};
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions
@@ -38,8 +37,8 @@ async function startQuiz() {
   // hide all
   hideAllSections();
   // fetch questions
-  right = 0; // reinializing variiable to start quiz again
-  wrong = 0;
+  // reinializing variiables to start quiz again
+  points = {right: 0, wrong: 0, tries: 0};
   const data = await getQuestions();
   questions = data.results;
   console.log(questions);
@@ -100,6 +99,7 @@ function showNextQuestion() {
 
   backBtn.disabled = true;
   nextBtn.disabled = true;
+
   // add one to the counter
   currentQuestionIndex++;
 }
@@ -109,10 +109,10 @@ function selectAnswer(ev) {
   clickedButton.classList.remove("btn-primary");
   if (clickedButton.dataset.correct) {
     clickedButton.classList.add("btn-success");
-    right = right + 1;
+    points.right++;
   } else {
     clickedButton.classList.add("btn-danger");
-    wrong = wrong + 1;
+    points.wrong++;
   }
   backBtn.disabled = false;
   nextBtn.disabled = false;
@@ -132,7 +132,7 @@ function goNextQuestion() {
 
 function showResults() {
   alert(
-    `Well done, you scored ${right} correct answers and ${wrong} wrong answers.`
+    `Well done, you scored ${points.right} correct answers and ${points.wrong} wrong answers.`
   );
   results.classList.remove("d-none");
   var usersDb = localStorage.getItem("results"); //traemos la informacion del local storage a un var
@@ -142,8 +142,9 @@ function showResults() {
   }
   let resultsData = {
     date: new Date(),
-    correctAnswers: right,
-    incorrectAnswers: wrong,
+    correctAnswers: points.right,
+    incorrectAnswers: points.wrong,
+    tries: points.tries,
   };
   database.push(resultsData); //pushing infoOfUsers to database array
   localStorage.setItem("results", JSON.stringify(database));
