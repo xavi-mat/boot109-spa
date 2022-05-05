@@ -34,29 +34,33 @@ let wrong = 0;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions
-async function startQuiz() {
+function startQuiz() {
   // hide all
   hideAllSections();
-  // fetch questions
   right = 0; // reinializing variiable to start quiz again
   wrong = 0;
-  const data = await getQuestions();
-  questions = data.results;
   console.log(questions);
   // restart counter
   currentQuestionIndex = 0;
-  // call first question
-  showNextQuestion();
+  // fetch questions
+  getQuestions()
 }
 
 function hideAllSections() {
-  document
+    document
     .querySelectorAll("section")
     .forEach((sect) => sect.classList.add("d-none"));
 }
 
 function getQuestions() {
-  return fetch(APIURL).then((response) => response.json());
+    return fetch(APIURL).then((response) => { // gets info from server, if exito then we use it
+        
+        const data = response.json() ; // translating to readable info
+        questions = data.results;  // assighning the results to questions variable
+        showNextQuestion();  // perform function 
+    });
+    
+    
 }
 
 function showNextQuestion() {
