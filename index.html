@@ -22,11 +22,13 @@
     <nav class="navbar bg-primary text-light mb-3">
       <div class="container">
         <h1>Quiz</h1>
+        <button id="homeBtn" class="btn btn-primary">Home</button>
       </div>
     </nav>
 
     <div class="fixed-top mt-md-5 pt-md-5 pe-1 d-flex justify-content-end">
-      <div id="toast" class="toast show">
+      <div id="toast" class="toast">
+        <!-- Add 'show' class to show the toast -->
         <div class="toast-header">
           <strong class="me-auto">Your answer is:</strong>
           <button
@@ -85,11 +87,21 @@
 
       <!-- Section results -->
       <section id="results" class="d-none">
-        <div id="grade"></div>
-        <div>
-          <h2>Here are your results!</h2>
-          <div id="result-msg"></div>
-          <button id="replay-btn" class="btn btn-primary">Play again</button>
+        <div class="card p-5">
+          <div class="card-body">
+
+            <div class="row">
+
+              <div id="grade" class="col-4 display-1 text-center"></div>
+
+              <div class="col-8">
+                <h4 class="p-3">Here are your results!</h4>
+                <div id="result-msg" class="p-3"></div>
+                <button id="replay-btn" class="btn btn-primary m-3">Play again</button>
+              </div>
+
+            </div>
+          </div>
         </div>
       </section>
     </main>

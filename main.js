@@ -20,7 +20,7 @@ const resultMsg = document.getElementById("result-msg");
 const replayBtn = document.getElementById("replay-btn");
 
 // Constants
-const NUM_QUESTIONS = 2;
+const NUM_QUESTIONS = 1;
 const APIURL =
   `https://opentdb.com/api.php?amount=${NUM_QUESTIONS}&category=20&difficulty=hard&type=multiple`;
 

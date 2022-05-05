@@ -28,7 +28,7 @@ Code a funcional quiz:
 - [x] Add navBar
 - [x] Structure of html main containers
 - [x] Add BS classes to elements
-- [ ] Beautify results
+- [x] Beautify results
 - [ ] Stats chart in home
 
 ### JS
@@ -40,3 +40,5 @@ Code a funcional quiz:
 - [x] Store points in localStorage
 - [ ] Retrieve points from localStorage
 - [ ] Show points in stats block
+- [ ] Progress bar
+- [ ] Toast
