@@ -13,7 +13,6 @@ const startBtn = document.getElementById("start-btn");
 const questionsSect = document.getElementById("question");
 const questionText = document.getElementById("question-text");
 const answersBox = document.getElementById("answers-box");
-const backBtn = document.getElementById("back-btn");
 const nextBtn = document.getElementById("next-btn");
 const results = document.getElementById("results");
 const grade = document.getElementById("grade");
@@ -86,20 +85,13 @@ function showNextQuestion() {
     button.addEventListener("click", selectAnswer);
     answersBox.appendChild(button);
   });
-  // activate the buttons
-  if (currentQuestionIndex === 0) {
-    backBtn.style.visibility = "hidden";
-  } else {
-    backBtn.style.visibility = "visible";
-  }
-
+  // activate the next button
   if (currentQuestionIndex === questions.length - 1) {
     nextBtn.innerText = "See results";
   } else {
     nextBtn.innerText = "Next";
   }
 
-  backBtn.disabled = true;
   nextBtn.disabled = true;
 
   // add one to the counter
@@ -116,7 +108,6 @@ function selectAnswer(ev) {
     clickedButton.classList.add("btn-danger");
     points.wrong++;
   }
-  backBtn.disabled = false;
   nextBtn.disabled = false;
   Array.from(answersBox.children).forEach((button) => {
     button.disabled = true;
@@ -173,7 +164,6 @@ function shuffleArray(array) {
 
 startBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", goNextQuestion);
-backBtn.addEventListener("click", goBackQuestion);
 replayBtn.addEventListener("click", startQuiz);
 ////////////////////////////////////////////////////////////////////////////////
 // Init
