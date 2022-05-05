@@ -24,12 +24,13 @@ const resultsSect = document.getElementById("results");
 const gradeBox = document.getElementById("grade");
 const resultMsg = document.getElementById("result-msg");
 const replayBtn = document.getElementById("replay-btn");
+const homeBtnResults = document.getElementById("home-btn-results");
 
-const homeBtn = document.getElementById("home-btn");
+const homeBtnNav = document.getElementById("home-btn-nav");
 const spinnerBox = document.getElementById('spinner');
 
 // Constants
-const NUM_QUESTIONS = 5;
+const NUM_QUESTIONS = 10;
 const APIURL =
     `https://opentdb.com/api.php?amount=${NUM_QUESTIONS}&category=20&difficulty=hard&type=multiple`;
 
@@ -47,9 +48,11 @@ function goHome() {
 
     let inn = '';
 
-    database.forEach((stat) =>
-        inn += `<li>${stat.date.substring(0,10)}: ${ 100 * stat.correctAnswers / (stat.incorrectAnswers + stat.correctAnswers)}%</li>`
-    );
+    database.forEach((stat) => {
+        const label = stat.date.substring(0,10);
+        const percent =  100 * stat.correctAnswers / (stat.incorrectAnswers + stat.correctAnswers);
+        inn += `<li>${label}: ${percent}%</li>`;
+    });
 
     if (inn === '') {
         inn = 'There are no stats to show.';
@@ -82,6 +85,7 @@ function hideAllSections() {
 }
 
 function showSection(section) {
+    // We love to see the spinner!!
     setTimeout(() => {
         section.classList.remove('d-none');
         spinnerBox.classList.add('d-none');
@@ -204,7 +208,7 @@ function getSavedData() {
 function saveResults() {
     const database = getSavedData();
     const resultsData = {
-        date: new Date(),
+        date: new Date().toLocaleString('es'),
         correctAnswers: points.right,
         incorrectAnswers: points.wrong,
     };
@@ -300,7 +304,8 @@ function shuffleArray(array) {
 startBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", goNextQuestion);
 replayBtn.addEventListener("click", startQuiz);
-homeBtn.addEventListener("click", goHome);
+homeBtnNav.addEventListener("click", goHome);
+homeBtnResults.addEventListener("click", goHome);
 
 
 ////////////////////////////////////////////////////////////////////////////////
