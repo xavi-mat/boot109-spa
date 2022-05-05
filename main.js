@@ -48,7 +48,7 @@ function goHome() {
     let inn = '';
 
     database.forEach((stat) =>
-        inn += `<li>${stat.date} . ${stat.correctAnswers} . ${stat.incorrectAnswers}</li>`
+        inn += `<li>${stat.date.substring(0,10)}: ${ 100 * stat.correctAnswers / (stat.incorrectAnswers + stat.correctAnswers)}%</li>`
     );
 
     if (inn === '') {
