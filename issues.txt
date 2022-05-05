@@ -1,0 +1,3 @@
+* Restart counters (right/wrong) to 0 in start quiz
+* lines 107, 110: shorthand to add 1 with ++
+* Interesting to use the Date as the key
