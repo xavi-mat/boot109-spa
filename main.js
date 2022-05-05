@@ -64,9 +64,12 @@ function goHome() {
     //     inn = '<ul>' + inn + '</ul>';
     // }
 
-    // statsBox.innerHTML = inn;
-
-    showChart(database);
+    if (database.length > 0) {
+        statsBox.innerHTML = '';
+        showChart(database);
+    } else {
+        statsBox.innerHTML = 'There are no stats to show.';
+    }
 
     showSection(homeSect);
 }

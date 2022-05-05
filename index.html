@@ -18,7 +18,10 @@
   <nav class="navbar bg-primary text-light mb-3">
     <div class="container">
       <h1>Quiz</h1>
-      <button id="home-btn-nav" class="btn btn-warning">Home</button>
+      <div>
+        <button id="home-btn-nav" class="btn btn-warning">Home</button>
+        <button id="start-btn" class="btn btn-warning">Take the quiz</button>
+      </div>
     </div>
   </nav>
 
@@ -39,14 +42,14 @@
 
     <!-- Section Home -->
     <section id="home" class="d-flex justify-content-center flex-wrap">
-      <div class="card m-3 p-3">
+      <!-- <div class="card m-3 p-3">
         <h3>Welcome to the quiz!</h3>
         <button id="start-btn" class="btn btn-primary">Take the quiz</button>
-      </div>
+      </div> -->
       <div class="card m-3 p-3">
         <h3>Your stats</h3>
-        <div id="stats-box">There are no stats to show.</div>
-        <canvas id="myChart" width="400" height="400"></canvas>
+        <div id="stats-box"></div>
+        <canvas id="myChart" width="500" height="500"></canvas>
       </div>
     </section>
 
