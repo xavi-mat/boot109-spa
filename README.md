@@ -8,7 +8,7 @@ https://classroom.google.com/u/0/c/NDgwNDYwMTI2OTAz/a/NTExMTY0NjUzNDUz/details
 ### Authors
 [Alex (@alextebbitt)](@alextebbitt) & [Xavi (@xavi-mat)](@xavi-mat)
 
-### Technologies
+### Technologies used
 * HTML5 (only one file)
 * [Bootstrap 5.1.3](https://getbootstrap.com)
 * JavaScript (SPA)
@@ -25,17 +25,17 @@ Code a funcional quiz:
 
 ### Frontend
 - [x] Structure of html minimal elements
-- [ ] Add navBar
-- [ ] Structure of html main containers
-- [ ] Add BS classes to elements
+- [x] Add navBar
+- [x] Structure of html main containers
+- [x] Add BS classes to elements
 - [ ] Stats chart in home
 
 ### Backend
 - [x] Fetch data from API
 - [x] Quiz functionality (questions, answers, next/back navigation)
-- [ ] Count right/wrong points
+- [x] Count right/wrong points
 - [ ] Show result points
 - [ ] Show result sentence (according to points)
-- [ ] Store points in localStorage
+- [x] Store points in localStorage
 - [ ] Retrieve points from localStorage
 - [ ] Show points in stats block

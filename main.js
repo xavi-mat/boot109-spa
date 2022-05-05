@@ -115,31 +115,43 @@ function selectAnswer(ev) {
 }
 
 function goNextQuestion() {
+  
   if (currentQuestionIndex < questions.length) {
+    // There are more questions:
     showNextQuestion();
+
   } else {
+    // There are no more questions:
     hideAllSections();
+    saveResults();
     showResults();
   }
 }
 
-function showResults() {
-  alert(
-    `Well done, you scored ${points.right} correct answers and ${points.wrong} wrong answers.`
-  );
-  results.classList.remove("d-none");
-  var usersDb = localStorage.getItem("results"); //traemos la informacion del local storage a un var
-  let database = JSON.parse(usersDb); //creating var to store. necessary step to translate to js
-  if (database == null) {
-    database = [];
-  }
-  let resultsData = {
+function saveResults() {
+  const usersDb = localStorage.getItem("results"); //traemos la informacion del local storage a un var
+  const database = JSON.parse(usersDb) || []; //creating var to store. necessary step to translate to js
+
+  const resultsData = {
     date: new Date(),
     correctAnswers: points.right,
     incorrectAnswers: points.wrong,
   };
   database.push(resultsData); //pushing infoOfUsers to database array
   localStorage.setItem("results", JSON.stringify(database));
+}
+
+function showResults() {
+
+  alert(
+    `Well done, you scored ${points.right} correct answers and ${points.wrong} wrong answers.`
+  );
+
+
+  results.classList.remove("d-none");
+
+
+
 }
 
 function goBackQuestion() {
