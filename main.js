@@ -8,16 +8,21 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // DOM Constants
-const home = document.getElementById("home");
+const homeSect = document.getElementById("home");
 const startBtn = document.getElementById("start-btn");
+const statsBox = document.getElementById("stats-box");
+
 const questionsSect = document.getElementById("question");
 const questionText = document.getElementById("question-text");
 const answersBox = document.getElementById("answers-box");
 const nextBtn = document.getElementById("next-btn");
+
 const resultsSect = document.getElementById("results");
 const gradeBox = document.getElementById("grade");
 const resultMsg = document.getElementById("result-msg");
 const replayBtn = document.getElementById("replay-btn");
+
+const homeBtn = document.getElementById("home-btn");
 
 // Constants
 const NUM_QUESTIONS = 1;
@@ -32,6 +37,27 @@ let points = {right: 0, wrong: 0};
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions
+function goHome() {
+  hideAllSections();
+  const database = getSavedData();
+
+  let inn = '';
+
+  database.forEach((stat) =>
+      inn += `<li>${stat.date} . ${stat.correctAnswers} . ${stat.incorrectAnswers}</li>`
+  );
+
+  if (inn === '') {
+    inn = 'There are no stats to show.';
+  } else {
+    inn = '<ul>' + inn + '</ul>';
+  }
+
+  statsBox.innerHTML = inn;
+
+  homeSect.classList.remove("d-none");
+}
+
 function startQuiz() {
   // hide all
   hideAllSections();
@@ -136,10 +162,14 @@ function goNextQuestion() {
   }
 }
 
-function saveResults() {
+function getSavedData() {
   const usersDb = localStorage.getItem("results"); //traemos la informacion del local storage a un var
-  const database = JSON.parse(usersDb) || []; //creating var to store. necessary step to translate to js
+  const dataArray = JSON.parse(usersDb) || []; //creating var to store. necessary step to translate to js
+  return dataArray;
+}
 
+function saveResults() {
+  const database = getSavedData();
   const resultsData = {
     date: new Date(),
     correctAnswers: points.right,
@@ -174,6 +204,7 @@ function goBackQuestion() {
   }
 }
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Ultils
 // from https://stackoverflow.com/a/12646864
@@ -183,17 +214,16 @@ function shuffleArray(array) {
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // Listeners
 startBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", goNextQuestion);
 replayBtn.addEventListener("click", startQuiz);
+homeBtn.addEventListener("click", goHome);
 
 
 ////////////////////////////////////////////////////////////////////////////////
 // Init
-////////////////////////////////////////////////////////////////////////////////
-//
-// make two variables for the wrong and right answrers incrementing them
-// show results with these numbers
-//the variables will sTART EVERY TIME a users starts the quiz and will be stored in the local storage. end at the end
+goHome();

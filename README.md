@@ -38,7 +38,7 @@ Code a funcional quiz:
 - [x] Show result points
 - [x] Show result sentence (according to points)
 - [x] Store points in localStorage
-- [ ] Retrieve points from localStorage
-- [ ] Show points in stats block
+- [x] Retrieve points from localStorage
+- [x] Show points in stats block
 - [ ] Progress bar
 - [ ] Toast
