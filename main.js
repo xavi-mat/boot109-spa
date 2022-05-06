@@ -65,7 +65,7 @@ function goHome() {
     // }
 
     if (database.length > 0) {
-        statsBox.innerHTML = '';  // if some1 has done test at least once put empty string 
+        statsBox.innerHTML = '';  // if some1 has done test at least once put empty string
         showChart(database);      // then show on empty array results from chart on empty string
     } else {
         statsBox.innerHTML = 'There are no stats to show.';
@@ -138,7 +138,7 @@ function hideAllSections() {
 }
 
 function showSection(section) {
-    // We love to see the spinner!! for one second 
+    // We love to see the spinner!! for one second
     setTimeout(() => {
         section.classList.remove('d-none'); // shows sections
         spinnerBox.classList.add('d-none'); // removes spinner
@@ -156,12 +156,12 @@ function getQuestions() {
     fetch(APIURL)  // gets the data of quiz from the api
         .then((resp) => resp.json()) // then waits for data to arrive, converts to an object whatever comes from json is put into the next parameter of .then
         .then((data) => data.results) // we chose data. data is the object with all info from api. result is the property of the info we have recieved from api
-        // taking data as an object returns data.results. Returns only the thing we want, which is resutls not reponse code.
-        .then(dataResults => {  // 
-            questions = dataResults; // now questions is now an array with all the questions
+        // taking data as an object returns data.results. Returns only the thing we want, which is resutls not reponse_code.
+        .then(dataResults => {  //
+            questions = dataResults; // questions is now an array with all the questions
         })
-        .then(() => {   // wait for questions to have questions then show next quesiton function 
-            showNextQuestion(); // 
+        .then(() => {   // wait for questions to have questions then show next quesiton function
+            showNextQuestion(); //
         })
         .catch(()=>{
             goHome();
@@ -173,17 +173,17 @@ function showNextQuestion() {
     // get question item
     const questionItem = questions[currentQuestionIndex];//1 element of array is taken from questions
     // put the question text
-    questionText.innerHTML = questionItem.question; // question text is an element from dom(div) 
+    questionText.innerHTML = questionItem.question; // question text is an element from dom(div)
     //pintar
-    
+
     // empty the answers box
-    while (answersBox.firstChild) {  
+    while (answersBox.firstChild) {
       answersBox.removeChild(answersBox.firstChild);
     }
 
     // put the four answers
     const answers = [...questionItem.incorrect_answers]; //  with ... making a copy of the inncorect ansswrs array
-    answers.push(questionItem.correct_answer);  //add correct answer to array of inncorect answer 
+    answers.push(questionItem.correct_answer);  //add correct answer to array of inncorect answer
     shuffleArray(answers);
 
     answers.forEach((answer) => {   // iterates over answerrs
@@ -191,7 +191,7 @@ function showNextQuestion() {
         button.innerHTML = answer; // paints the four answers in the button
         button.classList.add("btn", "btn-primary", "m-1"); // makes button which are the answersblu????
         if (answer === questionItem.correct_answer) {
-            button.dataset.correct = true; //dataset is a list of attributes, 
+            button.dataset.correct = true; //dataset is a list of attributes,
         }
         button.addEventListener("click", selectAnswer);
         answersBox.appendChild(button); ///  add four question buttons to div
@@ -216,7 +216,7 @@ function selectAnswer(ev) {
     const clickedButton = ev.target;
 
     clickedButton.classList.remove("btn-primary");  // Remove blue color
-    recolorClickedButton(clickedButton); 
+    recolorClickedButton(clickedButton);
     nextBtn.disabled = false;     // makes next button available after selecting an answer
     disableAllAnswerButtons();
     updateProgressBar();
@@ -244,7 +244,7 @@ function disableAllAnswerButtons() {   // after selecting an answer, it disables
 }
 function goNextQuestion() {
 
-    if (currentQuestionIndex < questions.length) { 
+    if (currentQuestionIndex < questions.length) {
         // There are more questions:
         showNextQuestion();
 
@@ -275,11 +275,7 @@ function saveResults() {
 
 function showResults() {
 
-    //   alert(
-    //     `Well done, you scored ${points.right} correct answers and ${points.wrong} wrong answers.`
-    //   );
-
-    gradeBox.innerHTML = `${points.right} / ${points.right + points.wrong}`; // paints right
+    gradeBox.innerHTML = `${points.right} / ${NUM_QUESTIONS}`; // paints right
     // and wrong answers into gradebox section
     if (points.right >= 8) {
         resultMsg.innerHTML = `Well done, you scored ${points.right} correct answers and ${points.wrong} wrong answers.`;
@@ -310,9 +306,13 @@ function showToast(color, text) {
     toast.classList.add('show');
 
     setTimeout(
-        () => { toast.classList.remove('show'); },
+        hideToast,
         2000
     );
+}
+
+function hideToast() {
+    toast.classList.remove('show');
 }
 
 // /**
@@ -362,4 +362,3 @@ homeBtnResults.addEventListener("click", goHome);
 ////////////////////////////////////////////////////////////////////////////////
 // Init
 goHome(); // we need this here because if not if wouldnt go back to home page
-// it would just ask us if we wanted to take quiz again
