@@ -25,8 +25,15 @@ Code a funcional quiz:
 
 ### Chart
 A bar chart for the success percentage and a line chart for the failure percentage.
+
 ![Chart image](./doc/chart.png)
 
+### Question
+A question with four possible answers; only one of them is correct.
+
+The *Next* button is faded because is disabled until the users clicks an answer.
+
+![Question image](./doc/question.png)
 
 ## TODO lists
 
