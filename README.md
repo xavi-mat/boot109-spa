@@ -35,6 +35,15 @@ The *Next* button is faded because is disabled until the users clicks an answer.
 
 ![Question image](./doc/question.png)
 
+### Correct answer
+After giving a correct answer, the answer button is colored green, all answers
+are disabled (to avoid former clicks), and the *next* button is enabled.
+
+Also, a toast is shown reporting the success (or failure) and will be hidden in
+three seconds.
+
+![Answer Image](./doc/answer.png)
+
 ## TODO lists
 
 ### HTML, CSS
