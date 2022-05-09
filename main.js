@@ -64,7 +64,7 @@ function goHome() {
   // }
 
   if (database.length > 0) {
-    statsBox.innerHTML = ""; // if some1 has done test at least once put empty string
+    statsBox.innerHTML = ""; // if you have done test, it cleans the line 70
     showChart(database); // then show on empty array results from chart on empty string
   } else {
     statsBox.innerHTML = "There are no stats to show.";
@@ -248,8 +248,8 @@ function recolorClickedButton(clickedButton) {
 
 function disableAllAnswerButtons() {
   // after selecting an answer, it disables all other answers
-  Array.from(answersBox.children).forEach((button) => {
-    button.disabled = true;
+  Array.from(answersBox.children).forEach((button) => { // array from creates an array from an iterable
+    button.disabled = true; 
   });
 }
 function goNextQuestion() {
