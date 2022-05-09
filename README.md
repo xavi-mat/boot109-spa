@@ -25,7 +25,7 @@ Code a funcional quiz:
 
 ### Chart
 A bar chart for the success percentage and a line chart for the failure percentage.
-![./doc/chart.png]
+![doc/chart.png]
 
 
 ## TODO lists
