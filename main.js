@@ -77,15 +77,21 @@ function showChart(database) {
   // Create the data for the chart from the 'data' array
   const labels = [];
   const data = [];
+  const data2 = [];
 
   database.forEach((stat) => {
     const label = stat.date.slice(0, -3);
     const percent =
       (100 * stat.correctAnswers) /
       (stat.incorrectAnswers + stat.correctAnswers);
+    const percent2 =
+      (100 * stat.incorrectAnswers) /
+      (stat.incorrectAnswers + stat.correctAnswers);
+
 
     labels.push(label);
     data.push(percent.toFixed(0));
+    data2.push(percent2.toFixed(0));
   });
 
   // Destroy former chart, if any
@@ -100,15 +106,29 @@ function showChart(database) {
       labels: labels,
       datasets: [
         {
+          type: 'line',
+          label: "% of failure",
+          data: data2,
+          borderWidth: 10,
+          backgroundColor: "#e68e8c",
+          borderColor: "#e68e8c",
+          // borderRadius: 15,
+        },
+        {
           label: "% of success",
           data: data,
           borderWidth: 1,
-          backgroundColor: "#ffc107",
+          backgroundColor: "#02b875",
           borderRadius: 15,
-        },
+        }
       ],
     },
     options: {
+      plugins: {
+        legend: {
+          display: true
+        }
+      },
       scales: {
         y: {
           beginAtZero: true,
@@ -249,7 +269,7 @@ function recolorClickedButton(clickedButton) {
 function disableAllAnswerButtons() {
   // after selecting an answer, it disables all other answers
   Array.from(answersBox.children).forEach((button) => { // array from creates an array from an iterable
-    button.disabled = true; 
+    button.disabled = true;
   });
 }
 function goNextQuestion() {
