@@ -44,6 +44,11 @@ three seconds.
 
 ![Answer Image](./doc/answer.png)
 
+### Results
+The last view shows the results and an appropriate sentence.
+
+![Results Image](./doc/results.png)
+
 ## TODO lists
 
 ### HTML, CSS
