@@ -21,6 +21,13 @@ Code a funcional quiz:
 * Fetching questions from an API
 * Storing results in localStorage
 
+## Screenshots
+
+### Chart
+A bar chart for the success percentage and a line chart for the failure percentage.
+![./doc/chart.png]
+
+
 ## TODO lists
 
 ### HTML, CSS
